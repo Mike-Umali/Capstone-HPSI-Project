@@ -1,0 +1,1530 @@
+<!-- 
+  NutriFusion - SUTD Capstone 2026
+  Colors: Maroon/Wine Red, Grey, White
+  
+  ========================================
+  HOW TO ADD TO ELEMENTOR:
+  ========================================
+  
+  METHOD 1: HTML Widget (Recommended)
+  1. Open your project page → Click "Edit with Elementor"
+  2. In the left panel, search for "HTML" widget (under Basic)
+  3. Drag the HTML widget onto your page
+  4. Delete any existing content in the widget
+  5. Paste this ENTIRE code
+  6. Click "Update" (green button)
+  
+  METHOD 2: Replace Entire Page Content
+  1. Edit with Elementor → Delete all existing widgets
+  2. Add one full-width Section
+  3. Add HTML widget inside
+  4. Paste this code
+  5. Update
+  
+  ========================================
+-->
+
+<style>
+/* ========================================
+   NUTRIFUSION - COMPREHENSIVE STYLES
+   Maroon/Wine Red + Grey + White Theme
+   Fully Responsive + Image Lightbox
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
+:root {
+  --nf-maroon: #722F37;
+  --nf-maroon-dark: #5C252C;
+  --nf-maroon-light: #8B3A44;
+  --nf-wine: #A04050;
+  --nf-burgundy: #800020;
+  --nf-white: #FFFFFF;
+  --nf-off-white: #FAF9F7;
+  --nf-grey-light: #F5F5F5;
+  --nf-grey: #E8E8E8;
+  --nf-grey-medium: #9CA3AF;
+  --nf-grey-dark: #4B5563;
+  --nf-charcoal: #2D2D2D;
+  --nf-text-dark: #1F1F1F;
+  --nf-text-muted: #6B7280;
+  --nf-border: rgba(114, 47, 55, 0.15);
+  --nf-shadow: rgba(114, 47, 55, 0.1);
+}
+
+/* ========================================
+   IMAGE LIGHTBOX OVERLAY - FULLSCREEN
+   ======================================== */
+.nf-lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  cursor: zoom-out;
+  padding: 40px;
+}
+
+.nf-lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nf-lightbox-overlay img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.nf-lightbox-overlay.active img {
+  transform: scale(1);
+}
+
+.nf-lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: var(--nf-maroon);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 100000;
+}
+
+.nf-lightbox-close:hover {
+  background: var(--nf-wine);
+  transform: scale(1.1);
+}
+
+/* Expandable Image Styling */
+.nf-expandable {
+  cursor: zoom-in;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+}
+
+.nf-expandable:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 50px rgba(114, 47, 55, 0.25);
+}
+
+.nf-container {
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--nf-off-white);
+  color: var(--nf-text-dark);
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+.nf-container * {
+  box-sizing: border-box;
+}
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+.nf-hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px;
+  position: relative;
+  text-align: center;
+  background: linear-gradient(135deg, var(--nf-maroon) 0%, var(--nf-maroon-dark) 50%, var(--nf-burgundy) 100%);
+  overflow: hidden;
+}
+
+.nf-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.nf-hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(to top, var(--nf-off-white), transparent);
+}
+
+.nf-hero-content {
+  max-width: 950px;
+  position: relative;
+  z-index: 2;
+}
+
+.nf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  padding: 12px 28px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--nf-white);
+  margin-bottom: 32px;
+  backdrop-filter: blur(10px);
+  letter-spacing: 0.05em;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.nf-badge::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--nf-white);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.3); }
+}
+
+.nf-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: 700;
+  margin: 0 0 28px 0;
+  color: var(--nf-white);
+  letter-spacing: -0.02em;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.nf-subtitle {
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 750px;
+  margin: 0 auto 40px;
+  font-weight: 400;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.nf-hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.nf-tag {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--nf-white);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.nf-tag:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================
+   BANNER IMAGE
+   ======================================== */
+.nf-banner {
+  width: 100%;
+  max-width: 1400px;
+  margin: -80px auto 0;
+  padding: 0 24px;
+  position: relative;
+  z-index: 10;
+}
+
+.nf-banner img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+  border: 4px solid var(--nf-white);
+}
+
+/* ========================================
+   SECTION STYLING
+   ======================================== */
+.nf-section {
+  padding: 100px 24px;
+  position: relative;
+}
+
+.nf-section-alt {
+  background: var(--nf-white);
+}
+
+.nf-section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nf-section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.nf-section-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--nf-maroon);
+  margin-bottom: 16px;
+  background: rgba(114, 47, 55, 0.08);
+  padding: 8px 20px;
+  border-radius: 50px;
+}
+
+.nf-section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  color: var(--nf-charcoal);
+}
+
+.nf-section-intro {
+  font-size: 1.125rem;
+  color: var(--nf-grey-dark);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   WHY SECTION
+   ======================================== */
+.nf-why-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .nf-why-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.nf-why-text p {
+  font-size: 1.125rem;
+  color: var(--nf-grey-dark);
+  margin: 0 0 24px 0;
+}
+
+.nf-why-text strong {
+  color: var(--nf-maroon);
+  font-weight: 700;
+}
+
+.nf-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.nf-tech-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--nf-white);
+  border: 2px solid var(--nf-grey);
+  border-radius: 12px;
+  padding: 14px 22px;
+  font-weight: 600;
+  color: var(--nf-charcoal);
+  transition: all 0.3s ease;
+}
+
+.nf-tech-item:hover {
+  border-color: var(--nf-maroon);
+  box-shadow: 0 4px 20px var(--nf-shadow);
+}
+
+.nf-tech-item svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--nf-maroon);
+}
+
+.nf-why-visual {
+  position: relative;
+}
+
+.nf-video-wrapper {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+  border: 4px solid var(--nf-white);
+}
+
+.nf-video-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  background: linear-gradient(135deg, var(--nf-maroon), var(--nf-wine));
+  border-radius: 20px;
+  z-index: -1;
+}
+
+.nf-video-wrapper iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  display: block;
+  border: none;
+}
+
+/* ========================================
+   HOW IT WORKS - IMAGE + TEXT GRID
+   ======================================== */
+.nf-architecture-img {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 60px;
+  display: block;
+}
+
+.nf-architecture-img img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--nf-grey);
+}
+
+.nf-features-detailed {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 60px;
+}
+
+@media (max-width: 900px) {
+  .nf-features-detailed {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nf-feature-block {
+  background: var(--nf-white);
+  border: 1px solid var(--nf-grey);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.nf-feature-block:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(114, 47, 55, 0.1);
+}
+
+.nf-feature-block img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  background: #f8f8f8;
+  border-bottom: 3px solid var(--nf-maroon);
+  padding: 16px;
+}
+
+.nf-feature-block-content {
+  padding: 32px;
+}
+
+.nf-feature-block h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.375rem;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  color: var(--nf-charcoal);
+}
+
+.nf-feature-block p {
+  font-size: 1rem;
+  color: var(--nf-text-muted);
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* ========================================
+   SUCCESS METRICS - DETAILED
+   ======================================== */
+.nf-metrics-section {
+  background: linear-gradient(135deg, var(--nf-maroon) 0%, var(--nf-maroon-dark) 100%);
+  position: relative;
+}
+
+.nf-metrics-section .nf-section-label {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--nf-white);
+}
+
+.nf-metrics-section .nf-section-title {
+  color: var(--nf-white);
+}
+
+.nf-metrics-grid-detailed {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 900px) {
+  .nf-metrics-grid-detailed {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nf-metric-detailed {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 40px;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+}
+
+.nf-metric-detailed:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.02);
+}
+
+.nf-metric-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.nf-metric-value {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--nf-white);
+  line-height: 1;
+}
+
+.nf-metric-label {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nf-metric-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--nf-white);
+  margin-bottom: 12px;
+}
+
+.nf-metric-desc {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ========================================
+   DESIGN PROCESS WITH IMAGES
+   ======================================== */
+.nf-process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+@media (max-width: 900px) {
+  .nf-process-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nf-process-image {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--nf-grey);
+  background: var(--nf-white);
+}
+
+.nf-process-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+  object-fit: contain;
+}
+
+.nf-process-image:hover img {
+  transform: scale(1.03);
+}
+
+.nf-process-timeline {
+  position: relative;
+  padding-left: 48px;
+  margin-top: 60px;
+}
+
+.nf-process-timeline::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--nf-maroon), var(--nf-wine), var(--nf-grey));
+}
+
+.nf-process-item {
+  position: relative;
+  padding: 0 0 48px 32px;
+}
+
+.nf-process-item:last-child {
+  padding-bottom: 0;
+}
+
+.nf-process-item::before {
+  content: '';
+  position: absolute;
+  left: -37px;
+  top: 8px;
+  width: 18px;
+  height: 18px;
+  background: var(--nf-white);
+  border: 4px solid var(--nf-maroon);
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px rgba(114, 47, 55, 0.1);
+}
+
+.nf-process-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+  color: var(--nf-charcoal);
+}
+
+.nf-process-content {
+  background: var(--nf-white);
+  border: 1px solid var(--nf-grey);
+  border-left: 4px solid var(--nf-maroon);
+  border-radius: 0 16px 16px 0;
+  padding: 28px 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.nf-process-content p {
+  margin: 0 0 16px 0;
+  color: var(--nf-grey-dark);
+  font-size: 1.05rem;
+}
+
+.nf-process-content p:last-child {
+  margin-bottom: 0;
+}
+
+.nf-process-content ul {
+  margin: 16px 0;
+  padding-left: 20px;
+  color: var(--nf-grey-dark);
+}
+
+.nf-process-content li {
+  margin-bottom: 10px;
+  font-size: 1.05rem;
+}
+
+.nf-process-content strong {
+  color: var(--nf-maroon);
+}
+
+/* ========================================
+   TEAM SECTION - 6 MEMBERS
+   ======================================== */
+.nf-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 48px;
+}
+
+@media (max-width: 900px) {
+  .nf-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .nf-team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nf-team-card {
+  background: var(--nf-white);
+  border: 1px solid var(--nf-grey);
+  border-radius: 20px;
+  padding: 36px 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.nf-team-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(114, 47, 55, 0.1);
+  border-color: var(--nf-maroon);
+}
+
+.nf-team-avatar {
+  width: 90px;
+  height: 90px;
+  background: linear-gradient(135deg, var(--nf-maroon), var(--nf-wine));
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--nf-white);
+  box-shadow: 0 8px 24px var(--nf-shadow);
+}
+
+.nf-team-name {
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin: 0 0 6px 0;
+  color: var(--nf-charcoal);
+}
+
+.nf-team-dept {
+  font-size: 0.875rem;
+  color: var(--nf-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.nf-instructors {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.nf-instructor-card {
+  background: var(--nf-white);
+  border: 1px solid var(--nf-grey);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.nf-instructor-type {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--nf-maroon);
+  margin-bottom: 12px;
+}
+
+.nf-instructor-name {
+  font-weight: 600;
+  color: var(--nf-charcoal);
+  margin: 0;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.nf-footer {
+  text-align: center;
+  padding: 48px 24px;
+  background: var(--nf-charcoal);
+}
+
+.nf-footer p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+}
+
+/* ========================================
+   FULLY RESPONSIVE BREAKPOINTS
+   ======================================== */
+
+/* Large Desktop */
+@media (min-width: 1400px) {
+  .nf-section-inner {
+    max-width: 1320px;
+  }
+  
+  .nf-features-detailed {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+  }
+  
+  .nf-metrics-grid-detailed {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Desktop */
+@media (max-width: 1200px) {
+  .nf-section {
+    padding: 80px 24px;
+  }
+  
+  .nf-why-content {
+    gap: 48px;
+  }
+  
+  .nf-metrics-grid-detailed {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet Landscape */
+@media (max-width: 1024px) {
+  .nf-hero {
+    min-height: 80vh;
+    padding: 80px 20px;
+  }
+  
+  .nf-title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+  }
+  
+  .nf-why-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .nf-features-detailed {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .nf-process-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .nf-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet Portrait */
+@media (max-width: 768px) {
+  .nf-section {
+    padding: 60px 16px;
+  }
+  
+  .nf-hero {
+    padding: 60px 16px 80px;
+    min-height: auto;
+  }
+  
+  .nf-banner {
+    margin-top: -40px;
+    padding: 0 16px;
+  }
+  
+  .nf-section-title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+  
+  .nf-metric-value {
+    font-size: 3rem;
+  }
+  
+  .nf-metric-detailed {
+    padding: 28px;
+  }
+  
+  .nf-process-timeline {
+    padding-left: 28px;
+  }
+  
+  .nf-process-item {
+    padding-left: 16px;
+  }
+  
+  .nf-process-item::before {
+    left: -28px;
+    width: 14px;
+    height: 14px;
+  }
+  
+  .nf-process-content {
+    padding: 20px 24px;
+  }
+  
+  .nf-feature-block-content {
+    padding: 24px;
+  }
+  
+  .nf-feature-block img {
+    height: 180px;
+  }
+  
+  .nf-hero-tags {
+    gap: 8px;
+  }
+  
+  .nf-tag {
+    padding: 8px 14px;
+    font-size: 0.8rem;
+  }
+  
+  .nf-expandable::after {
+    display: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .nf-section {
+    padding: 48px 12px;
+  }
+  
+  .nf-hero {
+    padding: 48px 12px 60px;
+  }
+  
+  .nf-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .nf-subtitle {
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+  
+  .nf-badge {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+  }
+  
+  .nf-section-header {
+    margin-bottom: 40px;
+  }
+  
+  .nf-section-title {
+    font-size: 1.75rem;
+  }
+  
+  .nf-section-intro {
+    font-size: 1rem;
+  }
+  
+  .nf-team-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .nf-team-card {
+    padding: 28px 20px;
+  }
+  
+  .nf-metrics-grid-detailed {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .nf-metric-detailed {
+    padding: 24px 20px;
+  }
+  
+  .nf-metric-value {
+    font-size: 2.5rem;
+  }
+  
+  .nf-metric-header {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .nf-instructors {
+    grid-template-columns: 1fr;
+  }
+  
+  .nf-tech-stack {
+    flex-direction: column;
+  }
+  
+  .nf-tech-item {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .nf-why-text p {
+    font-size: 1rem;
+  }
+  
+  .nf-process-timeline::before {
+    left: 7px;
+  }
+  
+  .nf-process-item::before {
+    left: -21px;
+    width: 12px;
+    height: 12px;
+  }
+  
+  .nf-process-title {
+    font-size: 1.25rem;
+  }
+  
+  .nf-process-content p,
+  .nf-process-content li {
+    font-size: 0.95rem;
+  }
+  
+  .nf-feature-block img {
+    max-height: 200px;
+    padding: 12px;
+  }
+  
+  .nf-video-wrapper {
+    border-width: 2px;
+  }
+  
+  .nf-video-wrapper::before {
+    inset: -4px;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 380px) {
+  .nf-title {
+    font-size: 2rem;
+  }
+  
+  .nf-section-title {
+    font-size: 1.5rem;
+  }
+  
+  .nf-hero-tags {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nf-tag {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Fluid Typography for Very Large Screens */
+@media (min-width: 1800px) {
+  .nf-container {
+    font-size: 18px;
+  }
+  
+  .nf-section-inner {
+    max-width: 1500px;
+  }
+}
+</style>
+
+<div class="nf-container">
+  
+  <!-- ======================================== -->
+  <!-- HERO SECTION -->
+  <!-- ======================================== -->
+  <section class="nf-hero">
+    <div class="nf-hero-content">
+      <div class="nf-badge">SUTD Capstone 2026 • Project S19 • HPSI</div>
+      <h1 class="nf-title">NutriFusion</h1>
+      <p class="nf-subtitle">
+        An integrated nutrition and athlete management system powered by Agentic AI, 
+        OCR technology, and vector-based search — designed to revolutionise elite sports 
+        nutrition for Singapore's national athletes.
+      </p>
+      <div class="nf-hero-tags">
+        <span class="nf-tag">Agentic AI</span>
+        <span class="nf-tag">OCR Technology</span>
+        <span class="nf-tag">Vector Search</span>
+        <span class="nf-tag">Single Source of Truth</span>
+        <span class="nf-tag">HPSI Partnership</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANNER IMAGE -->
+  <div class="nf-banner">
+    <img src="https://capstoneshowcase.sutd.edu.sg/wp-content/uploads/2026/01/banner-gg.jpg" alt="NutriFusion Banner" class="nf-expandable" onclick="openLightbox(this)">
+  </div>
+
+  <!-- LIGHTBOX OVERLAY -->
+  <div class="nf-lightbox-overlay" id="nfLightbox" onclick="closeLightbox()">
+    <button class="nf-lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img src="" alt="Expanded Image" id="lightboxImg">
+  </div>
+
+  <!-- ======================================== -->
+  <!-- WHY NUTRIFUSION -->
+  <!-- ======================================== -->
+  <section class="nf-section">
+    <div class="nf-section-inner">
+      <div class="nf-section-header">
+        <span class="nf-section-label">The Challenge</span>
+        <h2 class="nf-section-title">Why NutriFusion?</h2>
+      </div>
+      <div class="nf-why-content">
+        <div class="nf-why-text">
+          <p>
+            In high-performance sports, the bridge between raw data and athletic excellence is often hindered by 
+            <strong>fragmented systems and manual overhead</strong>. Nutrition scientists at the High Performance 
+            Sports Institute (HPSI) face daily challenges navigating disparate records, repetitive data entry, 
+            and time-consuming administrative processes.
+          </p>
+          <p>
+            <strong>NutriFusion</strong> bridges this gap by providing a unified digital infrastructure specifically 
+            designed for the rigors of elite athlete management. By leveraging <strong>Agentic AI, OCR technology, 
+            and vector-based search</strong>, the platform consolidates disparate records into a definitive 
+            <strong>Single Source of Truth (SSoT)</strong>.
+          </p>
+          <p>
+            This integration automates complex workflows—including supplement safety verification and alternative 
+            searching—empowering nutrition scientists to deliver timely, structured insights that directly contribute 
+            to the <strong>peak performance of Singapore's elite athletes</strong>.
+          </p>
+          <div class="nf-tech-stack">
+            <div class="nf-tech-item">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              Agentic AI
+            </div>
+            <div class="nf-tech-item">
+              <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+              OCR Technology
+            </div>
+            <div class="nf-tech-item">
+              <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5z"/></svg>
+              Vector Search
+            </div>
+            <div class="nf-tech-item">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              Web Scraping
+            </div>
+          </div>
+        </div>
+        <div class="nf-why-visual">
+          <div class="nf-video-wrapper">
+            <iframe 
+              src="https://www.youtube.com/embed/eE--NLcgtPU?rel=0&showinfo=1&modestbranding=1" 
+              title="NutriFusion Demo Video"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================== -->
+  <!-- HOW IT WORKS - ARCHITECTURE & FEATURES -->
+  <!-- ======================================== -->
+  <section class="nf-section nf-section-alt">
+    <div class="nf-section-inner">
+      <div class="nf-section-header">
+        <span class="nf-section-label">System Overview</span>
+        <h2 class="nf-section-title">How Does NutriFusion Work?</h2>
+        <p class="nf-section-intro">
+          NutriFusion is a sophisticated digital ecosystem engineered to revolutionise elite sports nutrition 
+          by synthesising fragmented manual processes into a unified platform.
+        </p>
+      </div>
+      
+      <!-- Architecture Image -->
+      <div class="nf-architecture-img">
+        <img src="https://capstoneshowcase.sutd.edu.sg/wp-content/uploads/2026/01/archi-webpage.png" alt="NutriFusion System Architecture" class="nf-expandable" onclick="openLightbox(this)">
+      </div>
+
+      <!-- Feature Blocks with Images - Full Resolution -->
+      <div class="nf-features-detailed">
+        <div class="nf-feature-block">
+          <img src="https://capstoneshowcase.sutd.edu.sg/wp-content/uploads/elementor/thumbs/dashboard-rkjp8czw6a2xbnui4ge5t0eoexaz76gzadulnwxdos.jpg" alt="NutriFusion Dashboard" class="nf-expandable" onclick="openLightbox(this)">
+          <div class="nf-feature-block-content">
+            <h3>High-Clarity Visual Dashboard</h3>
+            <p>
+              NutriFusion utilises a <strong>high-clarity visual hierarchy</strong> to present comprehensive 
+              metrics at a glance. The interface employs a <strong>structured grid system</strong> to handle 
+              the complexities of elite athlete management, turning intensive consultation workflows into a 
+              streamlined digital experience. This design ensures that accuracy and data continuity remain 
+              the standard for every athlete record within the system.
+            </p>
+          </div>
+        </div>
+        <div class="nf-feature-block">
+          <img src="https://capstoneshowcase.sutd.edu.sg/wp-content/uploads/elementor/thumbs/ams-rkjp8hp34g9cxpnod0fanh7zdunt9nzmz1412aqeto.jpg" alt="Athlete Management System" class="nf-expandable" onclick="openLightbox(this)">
+          <div class="nf-feature-block-content">
+            <h3>Unified Athlete Profiles</h3>
+            <p>
+              NutriFusion synthesises comprehensive athlete profiles and medical histories into a unified 
+              digital environment, effectively eliminating the friction of navigating fragmented files. By 
+              centralising the consultation workflow, the platform provides sports scientists with 
+              <strong>a cohesive framework to monitor performance metrics within a single, integrated 
+              interface</strong>. This consolidation significantly reduces administrative overhead.
+            </p>
+          </div>
+        </div>
+        <div class="nf-feature-block">
+          <img src="https://capstoneshowcase.sutd.edu.sg/wp-content/uploads/elementor/thumbs/sss-rkjp8fteqs6sahqenzm1ihp272x2u9s6art23qt764.jpg" alt="Supplement Support System" class="nf-expandable" onclick="openLightbox(this)">
+          <div class="nf-feature-block-content">
+            <h3>Smart Supplement Support</h3>
+            <p>
+              Through the integration of advanced <strong>OCR technology</strong> for instantaneous safety 
+              verification and <strong>vectorisation similarity search</strong> for precision-matched 
+              supplement substitutes, the platform automates the most intensive administrative bottlenecks. 
+              The system can instantly verify supplement safety and find alternatives when needed.
+            </p>
+          </div>
+        </div>
+        <div class="nf-feature-block">
+          <img src="https://capstoneshowcase.sutd.edu.sg/wp-content/uploads/2026/01/archi-webpage.png" alt="AI-Powered Data Engine Architecture" class="nf-expandable" onclick="openLightbox(this)">
+          <div class="nf-feature-block-content">
+            <h3>AI-Powered Data Engine</h3>
+            <p>
+              An <strong>AI-powered web-scraping engine</strong> maintains a dynamic inventory by autonomously 
+              extracting supplement data from verified external sources. This ensures the database stays 
+              current without manual intervention, giving nutritionists access to the latest supplement 
+              information and market availability at all times.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================== -->
+  <!-- SUCCESS METRICS - DETAILED -->
+  <!-- ======================================== -->
+  <section class="nf-section nf-metrics-section">
+    <div class="nf-section-inner">
+      <div class="nf-section-header">
+        <span class="nf-section-label">Impact & Results</span>
+        <h2 class="nf-section-title">Success Matrix</h2>
+      </div>
+      <div class="nf-metrics-grid-detailed">
+        <div class="nf-metric-detailed">
+          <div class="nf-metric-header">
+            <span class="nf-metric-value">100%</span>
+            <span class="nf-metric-label">Traceability</span>
+          </div>
+          <h4 class="nf-metric-title">Uncompromising Security and Accountability</h4>
+          <p class="nf-metric-desc">
+            Data integrity is paramount. By implementing mandatory Two-Factor Authentication (2FA) and 
+            rigorous audit logging, the system guarantees 100% traceability. Every data entry, modification, 
+            and access point is securely tracked, providing administrators with complete peace of mind and 
+            ensuring the system meets the highest standards of operational compliance.
+          </p>
+        </div>
+        <div class="nf-metric-detailed">
+          <div class="nf-metric-header">
+            <span class="nf-metric-value">85%</span>
+            <span class="nf-metric-label">User Acceptance</span>
+          </div>
+          <h4 class="nf-metric-title">Driven by Real-World Effectiveness</h4>
+          <p class="nf-metric-desc">
+            A system is only as good as its adoption rate. Through targeted user testing with HPSI 
+            nutritionists, we validated the system's effectiveness, achieving an 85% acceptance rate. 
+            By introducing custom analysis permutations and advanced features not accommodated in previous 
+            workflows, the platform directly empowers nutritionists to draw deeper insights and make 
+            multi-dimensional decisions for their athletes.
+          </p>
+        </div>
+        <div class="nf-metric-detailed">
+          <div class="nf-metric-header">
+            <span class="nf-metric-value">50%</span>
+            <span class="nf-metric-label">Faster</span>
+          </div>
+          <h4 class="nf-metric-title">Drastically Reducing Administrative Load</h4>
+          <p class="nf-metric-desc">
+            Efficiency was a primary driver for this project. We analyzed the key workflows of nutritionists 
+            and broke them down into modular operations. By targeting specific bottlenecks and streamlining 
+            the user experience, the system drastically reduces the time taken to complete core tasks, 
+            cutting overall administrative time by up to 50% and easily justifying the operational transition.
+          </p>
+        </div>
+        <div class="nf-metric-detailed">
+          <div class="nf-metric-header">
+            <span class="nf-metric-value">1</span>
+            <span class="nf-metric-label">Single Source of Truth</span>
+          </div>
+          <h4 class="nf-metric-title">The Centralised Data Hub</h4>
+          <p class="nf-metric-desc">
+            Fragmented data slows down performance. This platform establishes a single source of truth by 
+            consolidating holistic athlete profiles and standardizing supplement data into one unified hub. 
+            This standardization allows nutritionists to systematically compare nutritional data, perform 
+            complex analyses, and seamlessly find supplement alternatives without cross-referencing 
+            multiple disparate sources.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================== -->
+  <!-- DESIGN PROCESS WITH IMAGES -->
+  <!-- ======================================== -->
+  <section class="nf-section nf-section-alt">
+    <div class="nf-section-inner">
+      <div class="nf-section-header">
+        <span class="nf-section-label">Our Journey</span>
+        <h2 class="nf-section-title">Design Process Flow</h2>
+        <p class="nf-section-intro">
+          From initial research to final validation, our design process was driven by real user needs 
+          and iterative refinement.
+        </p>
+      </div>
+      
+      <!-- Process Images - Full Resolution -->
+      <div class="nf-process-grid">
+        <div class="nf-process-image">
+          <img src="https://capstoneshowcase.sutd.edu.sg/wp-content/uploads/2026/01/Screenshot-2026-03-18-at-4.14.57-PM.png" alt="Design Process - Conceptualisation" class="nf-expandable" onclick="openLightbox(this)">
+        </div>
+        <div class="nf-process-image">
+          <img src="https://capstoneshowcase.sutd.edu.sg/wp-content/uploads/2026/01/Screenshot-2026-03-18-at-4.15.22-PM.png" alt="Design Process - Architecture" class="nf-expandable" onclick="openLightbox(this)">
+        </div>
+        <div class="nf-process-image">
+          <img src="https://capstoneshowcase.sutd.edu.sg/wp-content/uploads/2026/01/Screenshot-2026-03-18-at-4.16.15-PM.png" alt="Design Process - Validation" class="nf-expandable" onclick="openLightbox(this)">
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="nf-process-timeline">
+        <div class="nf-process-item">
+          <h3 class="nf-process-title">Conceptualisation</h3>
+          <div class="nf-process-content">
+            <p><strong>Understanding the Problem Space</strong></p>
+            <p>
+              We began by studying existing workflows at HPSI, identifying key challenges such as repetitive 
+              data entry, fragmented records, and time-consuming processes. Through extensive stakeholder 
+              interviews and workflow observation, we mapped out the pain points that nutritionists face daily.
+            </p>
+            <p>
+              These insights shaped a clear objective — <strong>Create an integrated system that centralises 
+              data and streamlines decision-making</strong> while maintaining the flexibility required for 
+              elite sports nutrition management.
+            </p>
+          </div>
+        </div>
+        <div class="nf-process-item">
+          <h3 class="nf-process-title">System Architecture Design</h3>
+          <div class="nf-process-content">
+            <p>
+              Rather than designing isolated screens, we structured the entire platform around core workflows. 
+              This holistic approach ensured that every feature serves a specific purpose in the nutritionist's 
+              daily routine:
+            </p>
+            <ul>
+              <li><strong>Dashboard</strong> for quick insights and daily overview of athlete consultations</li>
+              <li><strong>Athlete Management System</strong> for comprehensive consultation tracking and history</li>
+              <li><strong>Supplement Support System</strong> for intelligent recommendations and safety verification</li>
+            </ul>
+            <p>
+              We also implemented <strong>Centralised data architecture</strong> for seamless data flow and 
+              <strong>Role-Based Access Control (RBAC)</strong> for secure, role-specific access across 
+              different user types.
+            </p>
+          </div>
+        </div>
+        <div class="nf-process-item">
+          <h3 class="nf-process-title">User & Stakeholder Mapping</h3>
+          <div class="nf-process-content">
+            <p>
+              To ensure the system addressed real-world needs, we developed detailed <strong>user personas</strong> 
+              representing nutrition scientists, as well as <strong>third-party stakeholders</strong> impacted 
+              by the platform. This comprehensive mapping allowed us to:
+            </p>
+            <ul>
+              <li>Understand different user goals, behaviours, and pain points across roles</li>
+              <li>Identify how data flows across multiple roles and departments</li>
+              <li>Anticipate interactions between primary users and supporting systems</li>
+              <li>Design for both common workflows and edge cases</li>
+            </ul>
+            <p>
+              By mapping these perspectives, we ensured the platform was designed not just for a single user, 
+              but as a <strong>connected ecosystem supporting all stakeholders</strong> in the athlete 
+              nutrition pipeline.
+            </p>
+          </div>
+        </div>
+        <div class="nf-process-item">
+          <h3 class="nf-process-title">Iterations & Validation</h3>
+          <div class="nf-process-content">
+            <p>
+              Through targeted user testing with HPSI nutritionists, we validated the system's effectiveness 
+              across multiple iteration cycles. Each round of testing revealed new opportunities for improvement, 
+              which we systematically addressed.
+            </p>
+            <p>
+              The result was an <strong>85% acceptance rate</strong> among test users. By introducing custom 
+              analysis permutations and advanced features not accommodated in previous workflows, the platform 
+              directly empowers nutritionists to draw deeper insights and make data-driven decisions for their 
+              athletes with confidence.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================== -->
+  <!-- TEAM SECTION - 6 MEMBERS -->
+  <!-- ======================================== -->
+  <section class="nf-section">
+    <div class="nf-section-inner">
+      <div class="nf-section-header">
+        <span class="nf-section-label">The People</span>
+        <h2 class="nf-section-title">Team Members</h2>
+      </div>
+      <div class="nf-team-grid">
+        <!-- Team Member 1 -->
+        <div class="nf-team-card">
+          <div class="nf-team-avatar">E</div>
+          <p class="nf-team-name">Oon Eu Kuan Eugene</p>
+          <p class="nf-team-dept">Engineering Systems and Design (ESD)</p>
+        </div>
+        <!-- Team Member 2 -->
+        <div class="nf-team-card">
+          <div class="nf-team-avatar">M</div>
+          <p class="nf-team-name">Umali Mike Guil Anonuevo</p>
+          <p class="nf-team-dept">Information Systems Technology and Design (ISTD)</p>
+        </div>
+        <!-- Team Member 3 -->
+        <div class="nf-team-card">
+          <div class="nf-team-avatar">W</div>
+          <p class="nf-team-name">Cheong Weng Hoi</p>
+          <p class="nf-team-dept">Information Systems Technology and Design (ISTD)</p>
+        </div>
+        <!-- Team Member 4 -->
+        <div class="nf-team-card">
+          <div class="nf-team-avatar">Y</div>
+          <p class="nf-team-name">Khoo Yong Xuan</p>
+          <p class="nf-team-dept">Information Systems Technology and Design (ISTD)</p>
+        </div>
+        <!-- Team Member 5 -->
+        <div class="nf-team-card">
+          <div class="nf-team-avatar">C</div>
+          <p class="nf-team-name">Tan Shi En, Cion</p>
+          <p class="nf-team-dept">Design and Artificial Intelligence (DAI)</p>
+        </div>
+        <!-- Team Member 6 -->
+        <div class="nf-team-card">
+          <div class="nf-team-avatar">G</div>
+          <p class="nf-team-name">Georgia Karen Lau</p>
+          <p class="nf-team-dept">Engineering Systems and Design (ESD)</p>
+        </div>
+      </div>
+      <div class="nf-instructors">
+        <div class="nf-instructor-card">
+          <div class="nf-instructor-type">Instructors</div>
+          <p class="nf-instructor-name">Add instructor names here</p>
+        </div>
+        <div class="nf-instructor-card">
+          <div class="nf-instructor-type">Writing Instructors</div>
+          <p class="nf-instructor-name">Add writing instructor names here</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================== -->
+  <!-- FOOTER -->
+  <!-- ======================================== -->
+  <footer class="nf-footer">
+    <p>© 2026 SUTD — Singapore University of Technology and Design</p>
+  </footer>
+
+</div>
+
+<!-- LIGHTBOX JAVASCRIPT -->
+<script>
+function openLightbox(img) {
+  const lightbox = document.getElementById('nfLightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt;
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('nfLightbox');
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close lightbox with Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeLightbox();
+  }
+});
+
+// Prevent closing when clicking on the image itself
+document.getElementById('lightboxImg').addEventListener('click', function(e) {
+  e.stopPropagation();
+});
+</script>
